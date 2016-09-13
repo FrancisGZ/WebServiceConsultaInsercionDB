@@ -53,68 +53,50 @@ class WsResultados
             $rs->MoveNext();
         }
 
-        /* array_push($array, "A");
-        array_push($array, "B");*/
+        
          return json_encode($array);
     }
 
 
 
-    public function getResultadosByIdMuestra ($id_muestra)
-    {
-       
-        $sql = "select id_determinacion,id_paq,resultado FROM detalle_determinaciones_muestra where id_muestra = $id_muestra";
-
-        $rs = $this->db->Execute($sql);
-
-        $arrayResultados = array();
-
-        while(!$rs->EOF)
-        {
-            $arrayResultados[] = array(
-                'id_determinacion' => $rs->fields[0],
-                'id_paq'    => $rs->fields[1],
-                'resultado' => $rs->fields[2]
-                );
-
-            $rs->MoveNext();
-        }
-
-
-            $stringJson= json_encode($arrayResultados);
-
-        //return json_encode($arrayResultados);
-            return $stringJson;
-    }
+   
  
 
 
-public function insertResultados ($arrayResultados)
+public function insertResultados123 ($arrayResultados)
 {
+    
 
     foreach ($arrayResultados as $value) {
             
             $id_muestra = $value['id_muestra'];
             $id_determinacion = $value['id_determinacion'];
             $id_paq = $value['id_paq'];
+            $status = $value['status'];
             $resultado = $value['resultado'];
-
-            $sql = "insert intr resultados (id_muestra,id_determinacion,id_paq,resultado) values($id_muestra,$id_determinacion,$id_paq,$resultado)";
+            $sql = "insert into detalle_determinaciones_muestra (id_muestra,id_determinacion,id_paq,status,resultado) values($id_muestra,$id_determinacion,$id_paq,$status,$resultado)";
             $rs = $this->db->Execute($sql);
         }
 
-        return "Carga exitosa";
+        return "Carga Exitosa";
 
     
 }
 
-    public function sum($a, $b)
+        public function insertResultados ($id_muestra,$id_determinacion,$id_paq,$status,$resultado)
     {
-        return array_sum(func_get_args());
+            $sql = "insert into detalle_determinaciones_muestra (id_muestra,id_determinacion,id_paq,status,resultado) values(1,2,3,4,5)";
+                //$sql = "insert into detalle_determinaciones_muestra (id_muestra,id_determinacion,id_paq,status,resultado) values($id_muestra,$id_determinacion,$id_paq,$status,$resultado)";
+                $rs = $this->db->Execute($sql);
+                
+
+            return "Carga Exitosa";
+
+        
     }
- 
-    public function getName($name)
-    {
-        return "Hello " . $name;
-    }
+
+
+
+    
+    
 }

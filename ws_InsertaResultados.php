@@ -17,7 +17,8 @@ class ws_InsertaResultados
 		 $ns = "urn:miserviciowsdl";
 		 $_soapServer->register(
 		 		'WsResultados.insertResultados',
-		 		array('arrayResultados' => 'xsd:string'),
+		 		array('id_muestra' => 'xsd:string', 'id_determinacion' => 'xsd:string', 'id_paq' => 'xsd:string', 'status' => 'xsd:string', 'resultado' => 'xsd:string' ),
+		 		//array('id_muestra' => 'xsd:string', 'id_determinacion' => 'xsd:string', 'id_paq' => 'xsd:string', 'status' => 'xsd:string', 'resultado' => 'xsd:string', ),
 		 		array('return' => 'xsd:string'),
 		 		$ns,
 		 		false,
@@ -26,7 +27,21 @@ class ws_InsertaResultados
 		 		'Servicio web que inserta resultados'
 		 	);
 
-		 $_soapServer->service(file_get_contents("php://input"));
+		  
+		 	/*$server->configureWSDL('server', 'urn:server');
+			$server->wsdl->schemaTargetNamespace = 'urn:server';	
+		  	$_soapServer->register('WsResultados.insertResultados',
+		  	array('name' => 'xsd:string'),        
+            array('return' => 'xsd:string'),
+            'urn:server',
+            'urn:server#getrequest');*/
+
+		
+		/*  	$HTTP_RAW_POST_DATA = isset($HTTP_RAW_POST_DATA) ? $HTTP_RAW_POST_DATA : '';
+
+			$server->service($HTTP_RAW_POST_DATA);*/
+
+		$_soapServer->service(file_get_contents("php://input"));
 	}
 }
 
