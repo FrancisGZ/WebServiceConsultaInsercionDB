@@ -15,12 +15,25 @@ class ws_InsertaResultados
 		 $_soapServer = new soap_server();
 		 $_soapServer->configureWSDL("ServicioWSDL");
 		 $ns = "urn:miserviciowsdl";
+
+
+		 $_soapServer->wsdl->addComplexType('MyComplexType','complexType','struct','all','',
+        array( 
+        		'id_muestra' => array('name' => 'id_muestra','type' => 'xsd:string'),
+               	'id_determinacion' => array('name' => 'id_determinacion','type' => 'xsd:string'),
+               	'id_paq' => array('name' => 'id_paq','type' => 'xsd:string'),
+               	'status' => array('name' => 'status','type' => 'xsd:string'),
+               	'resultado' => array('name' => 'resultado','type' => 'xsd:string'),
+               	));
+
+
 		 $_soapServer->register(
 		 		'WsResultados.insertResultados',
-		 		array('id_muestra' => 'xsd:string', 'id_determinacion' => 'xsd:string', 'id_paq' => 'xsd:string', 'status' => 'xsd:string', 'resultado' => 'xsd:string' ),
-		 		//array('id_muestra' => 'xsd:string', 'id_determinacion' => 'xsd:string', 'id_paq' => 'xsd:string', 'status' => 'xsd:string', 'resultado' => 'xsd:string', ),
-		 		array('return' => 'xsd:string'),
-		 		$ns,
+		 		array(),
+		 		//array('id_muestra' => 'xsd:string', 'id_determinacion' => 'xsd:string', 'id_paq' => 'xsd:string', 'status' => 'xsd:string', 'resultado' => 'xsd:string' ),
+		 		array('return' => 'xsd:MyComplexType'),
+		 		//array('return' => 'xsd:string'),
+		 		false,
 		 		false,
 		 		'rpc',
 		 		'encoded',
@@ -28,18 +41,7 @@ class ws_InsertaResultados
 		 	);
 
 		  
-		 	/*$server->configureWSDL('server', 'urn:server');
-			$server->wsdl->schemaTargetNamespace = 'urn:server';	
-		  	$_soapServer->register('WsResultados.insertResultados',
-		  	array('name' => 'xsd:string'),        
-            array('return' => 'xsd:string'),
-            'urn:server',
-            'urn:server#getrequest');*/
-
-		
-		/*  	$HTTP_RAW_POST_DATA = isset($HTTP_RAW_POST_DATA) ? $HTTP_RAW_POST_DATA : '';
-
-			$server->service($HTTP_RAW_POST_DATA);*/
+		 
 
 		$_soapServer->service(file_get_contents("php://input"));
 	}

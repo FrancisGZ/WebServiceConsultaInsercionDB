@@ -63,10 +63,11 @@ class WsResultados
  
 
 
-public function insertResultados123 ($arrayResultados)
+public function insertResultados ($arrayResultados)
 {
-    
-
+    /*$sql = "insert into detalle_determinaciones_muestra (id_muestra,id_determinacion,id_paq,status,resultado) values(1,2,3,4,5)";
+    $rs = $this->db->Execute($sql);*/
+                
     foreach ($arrayResultados as $value) {
             
             $id_muestra = $value['id_muestra'];
@@ -83,10 +84,10 @@ public function insertResultados123 ($arrayResultados)
     
 }
 
-        public function insertResultados ($id_muestra,$id_determinacion,$id_paq,$status,$resultado)
+        public function insertResultados123 ($id_muestra,$id_determinacion,$id_paq,$status,$resultado)
     {
-            $sql = "insert into detalle_determinaciones_muestra (id_muestra,id_determinacion,id_paq,status,resultado) values(1,2,3,4,5)";
-                //$sql = "insert into detalle_determinaciones_muestra (id_muestra,id_determinacion,id_paq,status,resultado) values($id_muestra,$id_determinacion,$id_paq,$status,$resultado)";
+                //$sql = "insert into detalle_determinaciones_muestra (id_muestra,id_determinacion,id_paq,status,resultado) values(1,2,3,4,5)";
+                $sql = "insert into detalle_determinaciones_muestra_detalle (id_muestra,id_determinacion,id_paq,status,resultado) values($id_muestra,$id_determinacion,$id_paq,$status,$resultado)";
                 $rs = $this->db->Execute($sql);
                 
 
